@@ -10,7 +10,7 @@ const ServerActionTestPage = () => {
         <input type="text" placeholder="desc" name="desc"/>
         <input type="text" placeholder="id" name="id"/>
         <input type="text" placeholder="userId" name="userId"/>
-        <button>Create</button>
+        <button>Create Post</button>
       </form>
 
     
