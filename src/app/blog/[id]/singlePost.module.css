@@ -1,0 +1,51 @@
+.container{
+    display: flex;
+    gap: 100px;
+}
+
+.imgContainer{
+    flex: 1;
+    position: relative;
+    height: calc(100vh -200px);
+}
+.textContainer{
+    flex: 2;
+    flex-direction: column;
+    gap: 50px;
+
+
+}
+.title{
+    font-size: 64px;
+}
+.detail{
+    display: flex;
+   
+    gap: 20px;
+}
+.avatar{
+    object-fit: cover;
+    border-radius: 50%;
+}
+.detailText{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.detailTitle{
+    font-weight: bold;
+    color: gray;
+}
+.detailValue{
+    font-weight: 500;
+}
+.content{
+    font-style: 25px;
+}
+
+@media(max-width:768px){
+.imgContainer{
+    display: none;
+}
+}

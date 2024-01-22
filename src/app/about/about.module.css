@@ -37,3 +37,16 @@
 .img{
     object-fit: contain;
 }
+
+
+@media (max-width:768){
+    .container{
+    flex-direction: column;
+      
+    }
+    .boxes{
+        flex-direction: column;
+        gap: 50px;
+        text-align: center;
+    }
+    }

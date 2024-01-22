@@ -1,9 +1,21 @@
-import React from 'react'
-
+import styles from './blog.module.css'
+import BlogPost from '@/components/blogPost/blogPost'
 const BlogPage = () => {
   return (
-    <div>
-      Blog page
+    <div className={styles.container}>
+      <div className={styles.posts}>
+          <BlogPost/>
+       </div>
+       <div className={styles.posts}>
+          <BlogPost/>
+       </div>
+       <div className={styles.posts}>
+          <BlogPost/>
+       </div>
+       <div className={styles.posts}>
+          <BlogPost/>
+       </div>
+
     </div>
   )
 }
