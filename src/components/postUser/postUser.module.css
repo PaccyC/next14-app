@@ -1,0 +1,13 @@
+.detailText{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.title{
+    font-weight: bold;
+    color: gray;
+}
+.username{
+    font-weight: 500;
+}
