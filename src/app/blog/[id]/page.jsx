@@ -12,6 +12,17 @@ import { getPost} from '@/lib/data'
 //   return data;
 // }
 
+
+export const generateMetadata= async({params})=>{
+  const {id}= params;
+  const post = await getPost(id)
+  return{
+    title:post.title,
+    description:post.desc
+  }
+
+}
+
 const SingleBlogPage = async({params}) => {
   const {id}= params;
   const post = await getPost(id)

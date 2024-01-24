@@ -7,7 +7,9 @@ const BlogPost = ({post}) => {
     <div className={styles.container}>
       <div className={styles.top}>
         <div className={styles.imgContainer}>
-          <Image src="/contact.png" fill className={styles.img} />
+          {post.img &&  
+          <Image src={post.img} fill className={styles.img} /> }
+         
         </div>
         <span className={styles.date}>12.1.2024</span>
       </div>
@@ -15,7 +17,7 @@ const BlogPost = ({post}) => {
       <div className={styles.bottom}>
         <h1 className={styles.title}>{post.title}</h1>
         <p className={styles.desc}>{post.desc}</p>
-        <Link href={`/blog/${post._id}`} className={styles.link}>READ MORE</Link>
+        <Link href={`/blog/${post.id}`} className={styles.link}>READ MORE</Link>
       </div>
     </div>
   );
