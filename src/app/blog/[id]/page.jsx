@@ -3,19 +3,29 @@ import Image from 'next/image'
 import PostUser from '@/components/postUser/postUser'
 import { Suspense } from 'react'
 import { getPost} from '@/lib/data'
-// const getData= async (id)=>{
-//   const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`,{next:{revalidate:3600}})
-//   if(!response.ok){
-//      throw new Error("Something went wrong")
+// const getData = async (id) => {
+//   try {
+//     const response = await fetch(`http://localhost:3000/api/blog/${id}`, {
+//       next: { revalidate: 3600 },
+//     });
+
+//     if (!response.ok) {
+//       throw new Error(`Failed to fetch data: ${response.statusText}`);
+//     }
+
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error("Something went wrong");
 //   }
-//   const data= await response.json()
-//   return data;
-// }
+// };
 
 
 export const generateMetadata= async({params})=>{
-  const {id}= params;
+    const {id}= params;
   const post = await getPost(id)
+  // const post = await getData(id)
   return{
     title:post.title,
     description:post.desc
@@ -25,7 +35,7 @@ export const generateMetadata= async({params})=>{
 
 const SingleBlogPage = async({params}) => {
   const {id}= params;
-  const post = await getPost(id)
+  const post = await getData(id)
   return (
     <div className={styles.container}>
      <div className={styles.imgContainer}>

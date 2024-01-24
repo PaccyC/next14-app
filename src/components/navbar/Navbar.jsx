@@ -1,7 +1,10 @@
 import React from 'react'
 import Links from './links/Links'
 import styles from "./navbar.module.css"
-const Navbar = () => {
+import { auth } from '@/lib/auth'
+const Navbar =async () => {
+  const session = await auth() ;
+  console.log(session);
   return (
     <div className={styles.container}>
             <div className={styles.logo}>
@@ -9,7 +12,7 @@ const Navbar = () => {
             </div>
          
 
-          <Links/>
+          <Links session={session}/>
             
     </div>
   )
