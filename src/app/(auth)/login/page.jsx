@@ -1,5 +1,6 @@
 // import { handleSignInWithGithub } from "@/lib/action"
-import { login } from "@/lib/action"
+import LoginForm from "@/components/loginForm/loginForm"
+import styles from './login.module.css'
 import { signIn } from "@/lib/auth"
 const LoginPage =async () => {
    const handleSignInWithGithub=async()=>{
@@ -9,16 +10,14 @@ const LoginPage =async () => {
  
 
   return (
-    <div>
-      <form action={handleSignInWithGithub}>
+    <div className={styles.container}>
+    <div className={styles.wrapper}>
+      <form action={handleSignInWithGithub} >
 
-<button>Signin with Github </button>
+<button className={styles.github} >Signin with Github </button>
 </form>
-<form action={login}>
-  <input type="email" name="email" placeholder="Email"/>
-  <input type="password" name="password" placeholder="Password"/>
-  <button>Login with Credentials</button>
-</form>
+<LoginForm/>
+    </div>
     </div>
   )
 }

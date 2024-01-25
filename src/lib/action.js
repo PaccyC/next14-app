@@ -3,8 +3,8 @@ import { revalidatePath } from "next/cache";
 import { Post,User } from "./models";
 import { connectToDb } from "./utils";
 import { signIn, signOut} from "@/lib/auth";
-import bcrypt from 'bcrypt'
-export const addPost = async (formData) => {
+import bcrypt from 'bcryptjs'
+export const addPost = async (previousState,formData) => {
     const { title, desc, id, userId } = Object.fromEntries(formData.entries());
   
     try {
@@ -25,15 +25,39 @@ export const addPost = async (formData) => {
       return { error: "Something went wrong!" };
     }
   };
+  export const addUser = async (formData) => {
+    const { username,email,password,img,id } = Object.fromEntries(formData.entries());
   
-  export const deletePost = async (formData) => {
-    const { id} = Object.fromEntries(formData.entries());
+    try {
+      connectToDb();
+      const newUser = new User({
+       username,
+       email,
+       password,
+       img,id
+      });
+  
+      await newUser.save();
+      console.log("saved to db");
+      revalidatePath("/blog")
+      revalidatePath("/admin")
+     
+    } catch (err) {
+      console.log(err);
+      return { error: "Something went wrong!" };
+    }
+  };
+  
+  
+  export const deletePost = async (id,formData) => {
+    // const { id} = Object.fromEntries(formData.entries());
   
     try {
       connectToDb();
   
       await Post.findByIdAndDelete(id);
       console.log("deleted from db");
+      
       revalidatePath("/blog")
      
     } catch (err) {
@@ -41,6 +65,26 @@ export const addPost = async (formData) => {
       return { error: "Something went wrong!" };
     }
   };
+  export const deleteUser = async (formData) => {
+    const { id} = Object.fromEntries(formData.entries());
+  
+    try {
+      connectToDb();
+  
+      await User.findByIdAndDelete(id);
+      console.log("deleted from db");
+      
+      revalidatePath("/blog")
+       
+      revalidatePath("/admin")
+     
+    } catch (err) {
+      console.log(err);
+      return { error: "Something went wrong!" };
+    }
+  };
+  
+
   
 
 export const handleSignInWithGithub=async()=>{
@@ -53,10 +97,11 @@ export const handleLogout=async()=>{
    await signOut()
   }
 
-  export const addUser = async(formData)=>{
+  export const register = async(previousState,formData)=>{
 const {username,email,password,passwordRetype,img}= Object.fromEntries(formData.entries());
 if (password != passwordRetype){
-  throw new Error("Passwords do not match")
+  return{error:"Passwords do not match"}
+
 }
 try {
   
@@ -72,11 +117,12 @@ try {
 
   const user= await User.findOne({email:email})
   if(user){
-  console.log("User already exists");
+  return {error:"User already exists"}
   }
 
   await newUser.save()
   console.log("New user created");
+  return {success:true}
 
 } catch (error) {
   console.log(error);
@@ -84,14 +130,21 @@ try {
 }  
 }
 
-export const login = async(formData) =>{
-  const {email,password}= Object.fromEntries(formData.entries());
+export const login = async(previousState,formData) =>{
+  const {email,password}= Object.fromEntries(formData);
   
   try {
     
     await signIn("credentials",{email,password})
-  } catch (error) {
-   console.log(error); 
+    return {success:true}
+  }
+  catch (err) {
+  console.log(err); 
+  if(err.message.includes ("CredentialsSignIn")){
+    return {error:"Invalid email or password"}
+  }
+  throw err
+
   }
  
 }
