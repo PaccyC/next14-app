@@ -4,6 +4,7 @@ import styles from  './adminUserForm.module.module.css'
 import { addUser } from '@/lib/action'
 import {useFormState} from 'react-dom'
 
+// admin
 const AdminUserForm = () => {
   const [state, formAction] = useFormState(addUser, undefined);
   
