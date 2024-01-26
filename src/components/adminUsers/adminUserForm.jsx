@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './adminUser.module.module.css'
+import styles from './adminUser.module.css'
 import { getUsers } from '@/lib/data'
 import { deleteUser } from '@/lib/action';
 const AdminUser = async() => {

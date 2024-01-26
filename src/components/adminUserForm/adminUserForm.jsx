@@ -1,6 +1,6 @@
 "use client"
 
-import styles from  './adminUserForm.module.module.css'
+import styles from  './adminUserForm.module.css'
 import { addUser } from '@/lib/action'
 import {useFormState} from 'react-dom'
 const AdminUserForm = () => {
@@ -15,7 +15,10 @@ const AdminUserForm = () => {
       <input type="password" name="password" placeholder="password"/>
       <input type="text" name="img" placeholder="img" />
        <select name="isAdmin">
-        <option value=""></option>
+        <option value="IsAdmin">
+          
+        </option>
+        
        </select>
       <button>Add</button>
       {state?.error}
